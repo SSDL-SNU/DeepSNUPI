@@ -1,7 +1,7 @@
 # Deep SNUPI
 Deep SNUPI is a graph neural networks model to predict the three-dimensional shape of DNA origami assemblies. It was trained by hybrid data-driven and physics-informed approach.
 
-![cover](cover.png)
+![cover](cover.PNG)
 
 ## Prerequisite
 - `python=3.9`
