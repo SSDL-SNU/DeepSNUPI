@@ -9,7 +9,7 @@ import streamlit as st
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 device_name = "GPU" if torch.cuda.is_available() else "CPU"
-image = Image.open('cover.png')
+image = Image.open('cover.PNG')
 
 # APP TITLE
 st.set_page_config(layout="wide")
