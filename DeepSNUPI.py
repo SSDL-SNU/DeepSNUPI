@@ -24,11 +24,11 @@ clicked_refine = None
 # OPTION 1 ABOUT
 if select == "ABOUT":
     st.image(image)
-    st.text("Computational analysis of nucleic acids structures based on Graph Neural Networks")
+    st.text("Computational analysis of nucleic acids structures using Graph Neural Networks")
     st.text("Simulation-Driven Structure Design Laboratory, Seoul National University")
     st.write('\n')
     st.markdown('<p style="font-size: 32px;">Dna Origami Graph Neural Networks</p>', unsafe_allow_html=True)
-    st.text("Deep-SNUPI is a graph neural networks model to predict the three-dimensional shape of DNA origami assemblies.") 
+    st.text("Deep SNUPI is a graph neural networks model to predict the three-dimensional shape of DNA origami assemblies.") 
     st.text("It was trained by hybrid data-driven and physics-informed approach.")
     
 #OPTION 2 ENSEMBLE MODEL PREDICT
@@ -36,7 +36,7 @@ elif select == "GNN predict":
     # File upload
     col1, col2 = st.columns(2)
     col1.write("###")
-    col1.markdown("Please upload input file or select from `dataset` folder")
+    col1.markdown("Please select samples from `dataset` folder or upload input file")
     input_type = col1.selectbox('Input options',(None, "Select samples", "Upload data")) 
     
     dna = None
