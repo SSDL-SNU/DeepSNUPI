@@ -45,9 +45,10 @@ For the best performances:
 
 
 # Dataset
-## Preprocessed input
-We provide the preprocessed input examples in the `dataset` folder
-  - The input examples for GNN predict: `dataset/origami/`
+## Preprocessed data
+We provide the preprocessed data in the `dataset/origami/` folder
+  - The training set: `dataset/origami/training_set`
+  - The input samples from SNUPI: `dataset/origami/snupi_input_samples/`
 
 ## Prepare your own DNA graph representation
 You can also generate your own input by [SNUPI](https://github.com/SSDL-SNU/SNUPI/tree/master) from caDNAno design
@@ -62,7 +63,7 @@ In this section we will demonstrate how to run Deep-SNUPI
     > *streamlit run DeepSNUPI.py* <br/>
     
   - Seclect `GNN predict` tool for predictions
-  - Upload your own input files or select examples input files from `dataset` folder
+  - Upload your own input files or select input samples
   - Click to choose prediction methods and take the predictions in output folder
 
 # References and citing

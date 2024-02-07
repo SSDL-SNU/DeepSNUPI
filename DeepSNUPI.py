@@ -36,112 +36,99 @@ elif select == "GNN predict":
     # File upload
     col1, col2 = st.columns(2)
     col1.write("###")
-    col1.markdown("Please select samples from `dataset` folder or upload input file")
-    input_type = col1.selectbox('Input options',(None, "Select samples", "Upload data")) 
+    col1.markdown("Please select input samples or upload your own input files")
+    input_type = col1.selectbox('Input options',(None, "Upload input", "Input samples")) 
     
     dna = None
     
     # select samples from dataset             
-    if input_type == "Select samples":
+    if input_type == "Input samples":
         user_input = False
         col1.markdown("👈 Click the arrow on left to select processed input data")
-        dataset = st.sidebar.selectbox('Dataset',("Training set", "Test set",)) 
-        
-        # Training set list
-        if dataset == "Training set":
-            select_processed_file = st.sidebar.selectbox('Training set',
-                                    (None,
-                                    "DX_Honeycomb_42bp",
-                                    "DX_Cross_63bp",
-                                    "DX_Arrowhead_63bp",
-                                    "DX_Annulus_42bp",
-                                    "DX_Sided_Polygon_126bp",
-                                    "2006_Rothemund_square",
-                                    "2009_Nature_railedbridge",
-                                    "2009_Science_Spiral_JY",
-                                    "2012_NAR_32hb_21xx",
-                                    "2012_NAR_32hb_42xx",
-                                    "2012_NAR_32hb_63xx",
-                                    "2012_NAR_32hb_84xx",
-                                    "2012_NAR_A",
-                                    "2012_NAR_S",
-                                    "2017_NatComm_10_L3R1_2hb_168ds",
-                                    "2019_ACS_Nano_Spring_01_6HB",
-                                    "2019_ACS_Nano_Spring_02_12HB",
-                                    "2019_ACS_Nano_Spring_03_24HB",
-                                    "2019_ACSnano_C_08_A01_6hb_twisted_1IH0L6_nBT_14B",
-                                    "2019_NAR_8_2INS_FLEX_2",
-                                    "2020_AngChem_8SQ_All_02T",
-                                    "2020_NatComm_TwistTower_TWCR_mod_delBPHJ",
-                                    "2021_ACSnano_Sq_10HB_Hollow_13_1id_3gap_twcorr",
-                                    "2021_ACSnano_Sq_12HB_0id_0gap_twcorr_scaffconn",
-                                    "Gyroelon_Penta_Pyramid_6HB_42bp",
-                                    "Triang_Bipyramid_6HB_126bp",
-                                    "Penta_Bipyramid_6HB_42bp",
-                                    "Square_Gyrobicupola_6HB_42bp",
-                                    )) 
-        # Test set list    
-        elif dataset == "Test set":
-            select_processed_file = st.sidebar.selectbox('Test set',
-                                    (None,
-                                    "2009_JACS_8Layer",
-                                    "2009_NAR_6x10",
-                                    "2009_Nature_genie_bottle",
-                                    "2009_Science_bent_60",
-                                    "2009_Science_gear_90",
-                                    "2017_Nature_Triangle",
-                                    "2017_Nature_V_22_55",
-                                    "2017_Nature_V_Emboss_01",
-                                    "2017_NatComm_L3_420ds",
-                                    "2017_NatComm_M1_2hb_252ds",
-                                    "2017_NatComm_M1M3_2hb_252ds",
-                                    "2017_NatComm_M1M3_2hb_168ds",
-                                    "2017_NatComm_M2R1_2hb_12nt",
-                                    "2017_NatComm_L3R1_2hb_triangle",
-                                    "2017_NatComm_M2_315ds_75deg",
-                                    "2017_NatComm_M2_441ds_120deg",
-                                    "2018_NatComm_Curved_Q",
-                                    "2019_NAR_2_Flexible",
-                                    "2019_ACSNano_12SQ",
-                                    "2019_ACSNano_Ins_H0L6_02",
-                                    "2019_ACSNano_Ins_H0L6_18",
-                                    "2019_ACSNano_Ins_H6L0_04",
-                                    "2019_ACSNano_Ins_H3L3_06",
-                                    "2019_ACSNano_Tetrahedron_84bp",
-                                    "2019_ACSNano_Cube_84bp",
-                                    "2019_ACSNano_Cubeocta_84bp",
-                                    "2019_ACSNano_Trunc_Tetra_63bp",
-                                    "2019_ACSNano_Triang_Bipyramid_63bp",
-                                    "2019_ACSNano_Penta_Bipyramid_105bp",
-                                    "2019_ACSNano_Rhom_Dodeca_63bp",
-                                    "2019_ACSNano_Tria_Tetra_84bp",
-                                    "2019_ACSNano_Twisted_Tri_Prism_42bp",
-                                    "2019_SciAdv_04_Wheel_DX_73bp",
-                                    "2019_SciAdv_06_Rhombic_Tiling_DX_42bp",
-                                    "2019_SciAdv_13_Hexagonal_Tiling_DX_63bp",
-                                    "2019_SciAdv_14_Prismatic_Penta_Tiling_DX_52bp",
-                                    "2019_SciAdv_16_4_Sided_Polygon_DX_73bp",
-                                    "2019_SciAdv_16_4_Sided_Polygon_DX_105bp",
-                                    "2019_SciAdv_17_5_Sided_Polygon_DX_73bp",
-                                    "2019_SciAdv_18_6_Sided_Polygon_DX_115bp",
-                                    "2019_SciAdv_19_L_Shape_42bp_DX_52bp",
-                                    "2020_NatComm_Pointer_v2",
-                                    "2020_NatComm_Dumbell_v2",
-                                    "2020_NatComm_HB_v3",
-                                    "2020_NatComm_6HBv3",
-                                    "2020_AngChem_8SQ_08T",
-                                    "2021_ACSNano_Sq_12HB_2gap",
-                                    )) 
-        
+        select_processed_file = st.sidebar.selectbox(   'Input samples',                                    
+                                                        (None,
+                                                        "DX_Honeycomb_42bp",
+                                                        "DX_Cross_63bp",
+                                                        "DX_Arrowhead_63bp",
+                                                        "DX_Annulus_42bp",
+                                                        "DX_Sided_Polygon_126bp",
+                                                        "2006_Rothemund_square",
+                                                        "2009_Nature_railedbridge",
+                                                        "2009_Science_Spiral_JY",
+                                                        "2012_NAR_32hb_21xx",
+                                                        "2012_NAR_32hb_42xx",
+                                                        "2012_NAR_32hb_63xx",
+                                                        "2012_NAR_32hb_84xx",
+                                                        "2012_NAR_A",
+                                                        "2012_NAR_S",
+                                                        "2017_NatComm_10_L3R1_2hb_168ds",
+                                                        "2019_ACS_Nano_Spring_01_6HB",
+                                                        "2019_ACS_Nano_Spring_02_12HB",
+                                                        "2019_ACS_Nano_Spring_03_24HB",
+                                                        "2019_ACSnano_C_08_A01_6hb_twisted_1IH0L6_nBT_14B",
+                                                        "2019_NAR_8_2INS_FLEX_2",
+                                                        "2020_AngChem_8SQ_All_02T",
+                                                        "2020_NatComm_TwistTower_TWCR_mod_delBPHJ",
+                                                        "2021_ACSnano_Sq_10HB_Hollow_13_1id_3gap_twcorr",
+                                                        "2021_ACSnano_Sq_12HB_0id_0gap_twcorr_scaffconn",
+                                                        "Gyroelon_Penta_Pyramid_6HB_42bp",
+                                                        "Triang_Bipyramid_6HB_126bp",
+                                                        "Penta_Bipyramid_6HB_42bp",
+                                                        "Square_Gyrobicupola_6HB_42bp",
+                                                        "2009_JACS_8Layer",
+                                                        "2009_NAR_6x10",
+                                                        "2009_Nature_genie_bottle",
+                                                        "2009_Science_bent_60",
+                                                        "2009_Science_gear_90",
+                                                        "2017_Nature_Triangle",
+                                                        "2017_Nature_V_22_55",
+                                                        "2017_Nature_V_Emboss_01",
+                                                        "2017_NatComm_L3_420ds",
+                                                        "2017_NatComm_M1_2hb_252ds",
+                                                        "2017_NatComm_M1M3_2hb_252ds",
+                                                        "2017_NatComm_M1M3_2hb_168ds",
+                                                        "2017_NatComm_M2R1_2hb_12nt",
+                                                        "2017_NatComm_L3R1_2hb_triangle",
+                                                        "2017_NatComm_M2_315ds_75deg",
+                                                        "2017_NatComm_M2_441ds_120deg",
+                                                        "2018_NatComm_Curved_Q",
+                                                        "2019_NAR_2_Flexible",
+                                                        "2019_ACSNano_12SQ",
+                                                        "2019_ACSNano_Ins_H0L6_02",
+                                                        "2019_ACSNano_Ins_H0L6_18",
+                                                        "2019_ACSNano_Ins_H6L0_04",
+                                                        "2019_ACSNano_Ins_H3L3_06",
+                                                        "2019_ACSNano_Tetrahedron_84bp",
+                                                        "2019_ACSNano_Cube_84bp",
+                                                        "2019_ACSNano_Cubeocta_84bp",
+                                                        "2019_ACSNano_Trunc_Tetra_63bp",
+                                                        "2019_ACSNano_Triang_Bipyramid_63bp",
+                                                        "2019_ACSNano_Penta_Bipyramid_105bp",
+                                                        "2019_ACSNano_Rhom_Dodeca_63bp",
+                                                        "2019_ACSNano_Tria_Tetra_84bp",
+                                                        "2019_ACSNano_Twisted_Tri_Prism_42bp",
+                                                        "2019_SciAdv_04_Wheel_DX_73bp",
+                                                        "2019_SciAdv_06_Rhombic_Tiling_DX_42bp",
+                                                        "2019_SciAdv_13_Hexagonal_Tiling_DX_63bp",
+                                                        "2019_SciAdv_14_Prismatic_Penta_Tiling_DX_52bp",
+                                                        "2019_SciAdv_16_4_Sided_Polygon_DX_73bp",
+                                                        "2019_SciAdv_16_4_Sided_Polygon_DX_105bp",
+                                                        "2019_SciAdv_17_5_Sided_Polygon_DX_73bp",
+                                                        "2019_SciAdv_18_6_Sided_Polygon_DX_115bp",
+                                                        "2019_SciAdv_19_L_Shape_42bp_DX_52bp",
+                                                        "2020_NatComm_Pointer_v2",
+                                                        "2020_NatComm_Dumbell_v2",
+                                                        "2020_NatComm_HB_v3",
+                                                        "2020_NatComm_6HBv3",
+                                                        "2020_AngChem_8SQ_08T",
+                                                        "2021_ACSNano_Sq_12HB_2gap",
+                                                        ))
         if select_processed_file is not None:
             file_name = select_processed_file
-            try:
-                dna = get_input("./dataset/origami/test/" + select_processed_file)
-            except:
-                dna = get_input("./dataset/origami/train/" + select_processed_file)
-                
+            dna = get_input("./dataset/origami/snupi_input_samples/" + select_processed_file)
+            
     # select upload data from users            
-    elif input_type == "Upload data":
+    elif input_type == "Upload input":
         file_upload = col1.expander(label="Upload a design file")
         uploaded_file = file_upload.file_uploader("(Please upload your own input file from SNUPI)")
         col1.markdown('***')
@@ -188,10 +175,7 @@ elif select == "GNN predict":
             print("Trial : Strain energy = %.2e[pNnm] | elec. energy = %.2e[pNnm]" %(SE_trial, EE_trial))
             fig_trial = draw_DnaOrigami(dna, y_trial[:, 0:6], SE_trial, EE_trial)
             fig_trial.update_layout(height=800)
-            if rmsd_trial is not None:
-                st.write("Predicted configuration: RMSD = %.1f[nm] (runtime = %.1fs)" %(rmsd_trial, runtime))
-            else:
-                st.write("Predicted configuration: (runtime = %.1fs)" %(runtime))
+            st.write("Predicted configuration: (runtime = %.1fs)" %(runtime))
             st.plotly_chart(fig_trial, use_container_width=True, height=800) 
             
         if clicked_refinement:
@@ -202,10 +186,7 @@ elif select == "GNN predict":
             except:
                 y_refine, rmsd_refine, run_time = self_refinement(dna, best_model_name, num_steps=num_refine_steps, file_name=file_name, device='cpu')
             
-            if rmsd_refine is not None:
-                st.write("Refinement configuration: RMSD = %.1f[nm] (runtime = %.1fs)" %(rmsd_refine, run_time))
-            else:
-                st.write("Refinement configuration: (runtime = %.1fs)" %(run_time))
+            st.write("Refinement configuration: (runtime = %.1fs)" %(run_time))
                 
             PE_refine, SE_refine, EE_refine = total_PE(y_refine, dna)    
             fig_refine = draw_DnaOrigami(dna, y_refine[:,0:6], SE_refine, EE_refine)
